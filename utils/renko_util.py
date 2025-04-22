@@ -122,7 +122,7 @@ class Renko:
 
     def get_brick_size(self, close):
         if self.brick_calc != None:
-            return self.brick_calc(close)
+            return self.brick_calc(close, self.bricks)
         return self.brick_size
 
     def create_new_brick(self, close, time_stamp):

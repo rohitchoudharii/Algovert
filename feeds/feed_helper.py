@@ -15,26 +15,23 @@ class FeedHelper:
 
     def get_feed(self, config):
         if "feed_type" in config:
-            feed_type = config["feed_type"]
-            del config["feed_type"]
+            feed_type = config.pop("feed_type")
         else:
             raise Exception("Feed Type not provided")
 
         if feed_type == "OHLC_QUEUE_FEED":
-            queue_key = config["redis_feed_key"]
+            queue_key = config.pop("redis_feed_key")
             queue = RedisQueue(queue_key)
             return OHLCQueueFeed(queue=queue, **config)
         elif feed_type == "RENKO_FEED":
-            brick_size = config["brick_size"]
-            brick_sizer_func = config["brick_sizer_func"]
-            del config["brick_size"]
-            del config["brick_sizer_func"]
+            brick_size = config.pop("brick_size")
+            brick_sizer_func = config.pop("brick_sizer_func")
             return RenkoFeed(
                 brick_size=brick_size, brick_sizer=brick_sizer_func, **config
             )
         elif feed_type == "PIPELINE_FEED":
-            return PipelineFeed(**config["pipeline_feed_config"])
+            return PipelineFeed(**config.pop("pipeline_feed_config"))
         elif feed_type == "AGGREGATOR_FEED":
-            return AggregatorFeed(**config["aggregator_feed_config"])
+            return AggregatorFeed(**config.pop("aggregator_feed_config"))
 
         raise Exception("Invalid feed type")

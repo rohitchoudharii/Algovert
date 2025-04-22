@@ -9,7 +9,7 @@ class PipelineFeed(BaseFeed):
 
         super().__init__(**configs)
         self.feeds: List[BaseFeed] = []
-        sub_feed_configs = configs["sub_feed_configs"]
+        sub_feed_configs = configs.get("sub_feed_configs")
         for sub_feed_config in sub_feed_configs:
             self.feeds.append(FeedHelper(**sub_feed_config).feed)
 

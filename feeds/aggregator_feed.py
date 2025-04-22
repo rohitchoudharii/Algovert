@@ -7,7 +7,7 @@ class AggregatorFeed(BaseFeed):
         from feeds.feed_helper import FeedHelper
 
         super().__init__(**configs)
-        self.sub_feed_configs = configs["sub_feed_configs"]
+        self.sub_feed_configs = configs.get("sub_feed_configs")
         self.feeds: List[BaseFeed] = []
         for sub_feed_config in self.sub_feed_configs:
             self.feeds.append(FeedHelper(**sub_feed_config).feed)
@@ -45,8 +45,7 @@ class AggregatorFeed(BaseFeed):
         for sub_feed_config in self.sub_feed_configs:
             new_data = new_datas[sub_feed_config["feed_name"]]
 
-            if "multiplier" in sub_feed_config:
-                new_data *= sub_feed_config["multiplier"]
+            new_data *= sub_feed_config.get("multiplier", 1)
 
             if sub_feed_config["operator"] == "ADD":
                 data += new_data

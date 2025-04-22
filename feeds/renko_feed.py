@@ -5,6 +5,9 @@ from utils.renko_util import Renko
 class RenkoFeed(BaseFeed):
     def __init__(self, brick_size=None, brick_sizer=None, **configs):
         super().__init__(**configs)
+        if isinstance(brick_sizer, str):
+            brick_sizer = eval(brick_sizer)
+
         self.renko = Renko(
             brick_size=brick_size, brick_calc=brick_sizer, multi_brick=False
         )

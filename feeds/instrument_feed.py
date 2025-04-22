@@ -26,7 +26,7 @@ class InstrumentFeed(bt.DataBase):
             if not self._check_session_range(data_feed_dto.datetime):
                 print("Not in session: ", data_feed_dto)
                 return None
-            # print("Data Feed: ", data_feed_dto)
+            print("Data Feed: ", data_feed_dto)
 
             self.lines.datetime[0] = bt.date2num(data_feed_dto.datetime)
             self.lines.open[0] = self._round(data_feed_dto.open)

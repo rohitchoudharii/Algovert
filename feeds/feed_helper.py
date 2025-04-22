@@ -1,4 +1,5 @@
 from feeds import BaseFeed, FeedData
+from feeds.resampler_feed import ResampleFeed
 from feeds.aggregator_feed import AggregatorFeed
 from feeds.ohlc_feed import OHLCQueueFeed
 from feeds.pipeline_feed import PipelineFeed
@@ -33,5 +34,7 @@ class FeedHelper:
             return PipelineFeed(**config.pop("pipeline_feed_config"))
         elif feed_type == "AGGREGATOR_FEED":
             return AggregatorFeed(**config.pop("aggregator_feed_config"))
+        elif feed_type == "RESAMPLE_FEED":
+            return ResampleFeed(**config)
 
         raise Exception("Invalid feed type")

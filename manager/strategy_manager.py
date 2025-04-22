@@ -6,6 +6,7 @@ import backtrader as bt
 class StrategyManager:
     def __init__(self, **config):
         self.position_type = config.get("position_type", "LONG")
+        print("Position type: ", self.position_type)
         self.order_details_by_data_name = config.get(
             "order_details_by_data_name", dict()
         )

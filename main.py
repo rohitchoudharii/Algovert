@@ -46,11 +46,17 @@ bot_manager = {
                     "feed_type": "OHLC_QUEUE_FEED",
                     "redis_feed_key": "NSE:CIPLA-EQ",
                 },
+                # {
+                #     "feed_name": "renko data",
+                #     "feed_type": "RENKO_FEED",
+                #     "brick_size": 0,
+                #     "brick_sizer_func": brick_sizer,
+                # },
                 {
-                    "feed_name": "renko data",
-                    "feed_type": "RENKO_FEED",
-                    "brick_size": 0,
-                    "brick_sizer_func": brick_sizer,
+                    "feed_name": "TATASTEEL",
+                    "feed_type": "RESAMPLE_FEED",
+                    "time_frame_in_seconds": 30,
+                    "completed_bars_only": True,
                 },
             ],
         },
@@ -103,17 +109,17 @@ cerebro.addstrategy(
 cerebro.addsizer(sizercls=bt.sizers.FixedSize, stake=1)
 # cerebro.broker.set_cash(initial_value)
 
-fyers_broker = FyersBroker(
-    client_id=os.environ["CLIENT_ID"],
-    access_token=os.environ["ACCESS_TOKEN"],
-    paper_trading=False,  # Set to True for paper trading
-)
+# fyers_broker = FyersBroker(
+#     client_id=os.environ["CLIENT_ID"],
+#     access_token=os.environ["ACCESS_TOKEN"],
+#     paper_trading=False,  # Set to True for paper trading
+# )
 
-cerebro.setbroker(fyers_broker)
-cerebro.addobserver(bt.observers.DataTrades)
+# cerebro.setbroker(fyers_broker)
+# cerebro.addobserver(bt.observers.DataTrades)
 
 print("Strategy Started")
-cerebro.run(live=True, stdstats=False)
+cerebro.run(live=True, stdstats=True)
 
 print("Strategy completed")
 

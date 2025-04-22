@@ -7,9 +7,7 @@ from typing import List
 from backtrader.broker import BrokerBase
 from backtrader.order import Order, BuyOrder, SellOrder
 from backtrader.position import Position
-from backtrader.utils.py3 import with_metaclass
 from backtrader.metabase import MetaParams
-from backtrader.broker import MetaBroker
 
 from fyers_apiv3 import fyersModel
 

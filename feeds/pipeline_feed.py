@@ -1,6 +1,5 @@
 from feeds import BaseFeed, FeedData
 from typing import List
-from datetime import datetime
 
 
 class PipelineFeed(BaseFeed):

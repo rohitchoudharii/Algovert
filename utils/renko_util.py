@@ -9,7 +9,6 @@ import pandas as pd
 from typing import List, Callable
 import json
 from datetime import datetime
-import matplotlib
 import talib
 import pandas_ta as ta
 import plotly.graph_objects as go
